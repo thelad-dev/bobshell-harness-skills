@@ -42,7 +42,7 @@ Project `.bob/settings.json` hooks, `.bob/mcp.json` servers, project skills and 
 4. Global hooks run in every folder that is not `DONT_TRUST`: review `~/.bob/settings/settings.json` hooks too.
 
 ## Command security (docs vs local)
-Docs: `bob run --command-security "<task>"` has an LLM check every shell command (including subagents) and blocks flagged ones or any it cannot check; without the flag `bob run` does no check even if settings enable it. Local `bob run --help` 2.0.6 does not list `--command-security` (verified): contradiction, prefer local help and test before relying on it.
+Docs: `bob run --command-security "<task>"` has an LLM check every shell command (including subagents) and blocks flagged ones or any it cannot check; without the flag `bob run` does no check even if settings enable it. Local `bob run --help` 2.0.6 does not list `--command-security` (verified): contradiction, prefer local help and test before relying on it. In the 2.1.0 package `bob run --command-security` exists, and interactive `bob chat` runs the check by default through the top-level user setting `isCommandSecurityEnabled` (default `true`); a flagged command then asks "Command is too complex and needs manual verification" even with `--auto-approve` (observed 2.1.0, details in `bob-approvals-and-trust`).
 
 ## Data residency (docs)
 - Three layers (inference, data processing, conversation storage) stay in the region the organization selected: US East (Washington D.C.), Europe (Frankfurt), Japan (Tokyo). Region is account-level; a steering agent cannot choose it per run.

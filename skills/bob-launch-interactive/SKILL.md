@@ -26,7 +26,7 @@ env -u BOB_SESSION -u CLAUDECODE LC_ALL=en_US.UTF-8 \
 
 | Flag (verified 2.0.6) | Use |
 |---|---|
-| `--auto-approve` | Skip tool approval prompts. Silently ineffective in an untrusted folder. |
+| `--auto-approve` | Skip tool approval prompts. Silently ineffective in an untrusted folder; two dialogs still ask in a trusted one (`bob-approvals-and-trust`). |
 | `--trust` | Mark the folder trusted (persists). Without trust, auto-approve and workspace hooks are suppressed. |
 | `-w, --workspace <path>` | Workspace root. Bob blocks file reads outside it by default. |
 | `--mode <slug>` | Start mode (`agent` default, `plan`, `ask`, custom slug). `/mode` takes no argument, so set it here. |
@@ -77,6 +77,7 @@ Other slash commands worth sending: `/compact` (free context), `/clear` (new tas
 - Closing the pane does not stop Bob; one SIGTERM does (verified 2.0.6). Interactive login shells ignore SIGTERM, so expect to reap the shell too.
 - Default `bobShell.autoUpdate` runs `npm install -g --force` at start and can replace Bob under a running worker. Set it to `false` in `~/.bob/settings/settings.json` (user settings only; per-task pinning is impossible) (verified 2.0.6).
 - If the project tracks its own `.bob/settings.json`, your hook and brief files there clobber it. Refuse or work around.
+- A worker can stop mid-turn on "Command is too complex and needs manual verification" or "This operation accesses protected Bob files and requires explicit approval" despite `--auto-approve --trust` (observed 2.1.0). The turn does not end; read the pane and answer it, details in `bob-approvals-and-trust`.
 
 ## See also
 `bob-run-headless`, `bob-sessions-resume`, `bob-approvals-and-trust`, `bob-hooks`, `bob-brief-and-context`, `bob-troubleshooting-pitfalls`.

@@ -69,6 +69,7 @@ Wrong or stale text stays in Messages and is re-sent on every prompt (docs). Sig
 
 ## Pitfalls
 - Brief outside the workspace: Bob cannot read it and stalls or invents. Keep it inside.
+- Naming `.bob/settings.json` in a brief or command: Bob asks for explicit approval even with `--auto-approve` (observed 2.1.0, `bob-approvals-and-trust`). `.bob/launch-brief.md` is fine.
 - "Check the backend" style asks: Bob explores broadly, fills the window, and costs more.
 - Resuming a poisoned task with `--resume`: the bad history comes back with it. Start fresh.
 - Pasting command output with truncation or odd characters: becomes "fact" in the transcript.

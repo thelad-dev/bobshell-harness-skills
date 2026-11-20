@@ -5,7 +5,7 @@ description: Load when an agent or program should drive Bob Shell as an Agent Cl
 
 # Drive Bob over ACP (`bob acp`)
 
-Use Bob as a structured, multi-turn backend: JSON-RPC over stdin/stdout, no terminal screen reading. Unmarked = docs; `(verified 2.0.6)` = local `bob acp --help`; `(client)` = taken from [pi-bob-acp](https://github.com/thelad-dev/pi-bob-acp), an ACP client (code and README) written against ACP v1 and tested with a fake child process, not run live here.
+Use Bob as a structured, multi-turn backend: JSON-RPC over stdin/stdout, no terminal screen reading. Unmarked = docs; `(verified 2.0.6)` = local `bob acp --help`; `(client)` = taken from pi-bob-acp (not public), an ACP client (code and README) written against ACP v1 and tested with a fake child process, not run live here.
 
 ## When to load
 - You are building or using a client (Pi extension, editor, orchestrator) that talks to Bob programmatically.
@@ -30,7 +30,7 @@ Flags (verified 2.0.6): `--log-level` (also env `BOB_LOG_LEVEL`), `--trust`, `--
 ## Trust
 - Bob checks workspace trust before creating a session; an untrusted workspace makes `session/new` fail (docs; `Workspace ... is not trusted`, client).
 - Prefer pre-registering that one folder (entry in `~/.bob/trustedFolders.json`, shape in `bob-launch-interactive`, or run `bob chat --trust --workspace <dir>` once) over starting the server with `--trust`.
-- `--trust` trusts EVERY workspace the server opens; `--trust --auto-approve` together removes both the folder gate and per-tool approval. Docs: do not put both in a default configuration. The [pi-bob-acp](https://github.com/thelad-dev/pi-bob-acp) default is `acp --trust` plus client-side auto-allow; treat that as a lab default, not a policy.
+- `--trust` trusts EVERY workspace the server opens; `--trust --auto-approve` together removes both the folder gate and per-tool approval. Docs: do not put both in a default configuration. The pi-bob-acp default is `acp --trust` plus client-side auto-allow; treat that as a lab default, not a policy.
 
 ## Protocol walk (ACP v1, newline-delimited JSON-RPC 2.0)
 Client to Bob, in order (client, ACP spec):
@@ -48,7 +48,7 @@ Serialise prompts per session; a client queues them.
 
 ## Driving it without writing a client
 - `acpx` (generic headless ACP CLI) has no built-in `bob` target but takes `--agent <command>`: `acpx --agent "/abs/bob acp" --cwd /abs/ws "prompt"`. Flags like `--approve-reads` or `--max-turns` live on the client side. Not run against Bob here (unverified).
-- The [pi-bob-acp](https://github.com/thelad-dev/pi-bob-acp) extension already wraps this for Pi (`bob-acp` provider; tools `bob_status`, `bob_session`, `bob_mode`, `bob_tasks`, `bob_doctor`; env `BOB_ACP_COMMAND`, `BOB_ACP_ARGS`, `BOB_ACP_AUTO_ALLOW`).
+- The pi-bob-acp extension already wraps this for Pi (`bob-acp` provider; tools `bob_status`, `bob_session`, `bob_mode`, `bob_tasks`, `bob_doctor`; env `BOB_ACP_COMMAND`, `BOB_ACP_ARGS`, `BOB_ACP_AUTO_ALLOW`).
 
 ## MCP and processes
 - Both client and Bob can supply MCP servers; both initialise in one Bob session harness. Give each server one owner. If a tool is missing, check client MCP config and Bob's own (`bob-mcp-setup`).
@@ -69,4 +69,4 @@ Serialise prompts per session; a client queues them.
 `bob-run-headless`, `bob-launch-interactive`, `bob-approvals-and-trust`, `bob-sessions-resume`, `bob-mcp-setup`, `bob-modes-and-orchestration`.
 
 ## Sources
-`shell/features/acp`, `shell/changelog` (2.0.2, 2.0.5, 2.0.6, 2.0.8), `local-help` (`bob acp --help`, bob 2.0.6), the README and source of [pi-bob-acp](https://github.com/thelad-dev/pi-bob-acp).
+`shell/features/acp`, `shell/changelog` (2.0.2, 2.0.5, 2.0.6, 2.0.8), `local-help` (`bob acp --help`, bob 2.0.6), the README and source of pi-bob-acp.
