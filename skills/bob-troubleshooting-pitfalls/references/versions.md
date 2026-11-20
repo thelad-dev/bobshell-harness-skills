@@ -15,7 +15,7 @@ Open this when behaviour differs between hosts or after an upgrade. Marks: `docs
 | 2.0.7 | migrates to `@ibm/bob` | Installing it migrates the install and updates to 2.0.9 from npm (docs). |
 | 2.0.8 | `@ibm/bob` | ACP server reliability fixes. |
 | 2.0.9 | `@ibm/bob` | Auto-update for npm installs of `@ibm/bob`. |
-| 2.1.0 | `@ibm/bob` | Verified live: licence dialog on a fresh `HOME`, otherwise a run completed (verified 2.1.0). |
+| 2.1.0 | `@ibm/bob` | Verified live: licence dialog on a fresh `HOME`, otherwise a run completed (verified 2.1.0). Two dialogs still ask under `--auto-approve --trust`: command security and protected Bob files (observed 2.1.0, see `bob-approvals-and-trust`). |
 
 ## Observed live differences
 - Package name: a process matcher has to accept both `bobshell` (2.0.6) and `@ibm/bob` (2.0.9, 2.1.0). Match by entry script, not by one name.
@@ -34,5 +34,5 @@ Open this when behaviour differs between hosts or after an upgrade. Marks: `docs
 
 ## What to do after an upgrade
 1. `bob --version` on the exact binary your launcher uses (absolute path).
-2. Re-check the version-dependent facts: composer placeholder colour, hook firing, trust handling, `-f json` field names.
+2. Re-check the version-dependent facts: composer placeholder colour, hook firing, trust handling, the dialogs that remain under auto-approve, `-f json` field names.
 3. Capture one `-f stream-json` sample and compare event shapes with the notes in `bob-verify-output`.

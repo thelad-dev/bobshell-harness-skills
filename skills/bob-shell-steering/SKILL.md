@@ -35,7 +35,7 @@ Entry skill for an agent that drives Bob Shell (CLI `bob`, npm `@ibm/bob`) as a 
 
 ## Ten rules
 1. Pick the entry point by control need: `bob run -f json` for one bounded task; `bob chat` in a pane for a worker you watch and steer; `bob acp` when a program must drive it.
-2. Always pass `--workspace <absolute path>`, absolute `bob`, and `--trust` or a pre-registered trusted folder. In an untrusted folder `--auto-approve`, hooks, project skills and MCP are silently dropped.
+2. Always pass `--workspace <absolute path>`, absolute `bob`, and `--trust` or a pre-registered trusted folder. In an untrusted folder `--auto-approve`, hooks, project skills and MCP are silently dropped. Even in a trusted folder two dialogs still ask; watch the pane (`bob-approvals-and-trust`).
 3. There is no `--model` or `--effort` flag (verified 2.0.6). Do not promise a model; pin outcomes with tests.
 4. `bob chat` has no positional prompt (verified 2.0.6). Put the brief in a file inside the workspace and send one line: `read <file> and follow it exactly.`
 5. In `bob run` all tools are pre-approved (docs) and a run without the key variable can still work on a host where Bob has a stored credential (verified 2.0.6). Constrain with `--mode ask|plan`, `--disable-tool-groups`, a clean git checkout and caps.
